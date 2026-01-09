@@ -33,9 +33,19 @@ const clarityScript = document.createElement("script");
  
       const delay = this.properties?.ThrottleMs ?? 0;
       if (delay > 0) await new Promise(r => setTimeout(r, delay));
- 
-      const pageUrl = location.href.split('?')[0];
-      const pageTitle = (document.title || '').substring(0, 255);
+const fullUrl = location.href;
+const pageUrl = fullUrl.split('?')[0];
+const pageTitle = (document.title || '').substring(0, 255);
+
+const pathParts = window.location.pathname.split('/');
+const subsiteName = pathParts.includes('sites') ? pathParts[3] : 'root';
+
+let listName = "";
+if (fullUrl.includes("AllItems.aspx")) {
+  const matches = fullUrl.match(/\/Lists\/([^\/]+)/i);
+  listName = matches ? decodeURIComponent(matches[1]) : "Unknown List";
+}
+
       const referrer = (document.referrer || '').substring(0, 255);
       const siteUrl = this.context.pageContext.site.absoluteUrl;
       const webUrl  = this.context.pageContext.web.absoluteUrl;
@@ -48,17 +58,20 @@ const clarityScript = document.createElement("script");
       const listTitle  = this.properties?.ListTitle || 'Site Usage Data';
  
       await this._addItem(targetSite, listTitle, {
-        PageUrl: pageUrl,
-        PageTitle: pageTitle,
-        Referrer: referrer,
-        SiteUrl: siteUrl,
-        WebUrl: webUrl,
-        UserDisplayName: userDisp,
-        SessionId: sessionId,
-        IsHomePage: isHome,
-        ClientInfo: clientInfo,
-        TimeStamp: new Date().toISOString()
-      });
+  PageUrl: pageUrl,
+  PageTitle: pageTitle,
+  SubsiteName: subsiteName,   // ✅ NEW
+  ListName: listName,         // ✅ NEW
+  Referrer: referrer,
+  SiteUrl: siteUrl,
+  WebUrl: webUrl,
+  UserDisplayName: userDisp,
+  SessionId: sessionId,
+  IsHomePage: isHome,
+  ClientInfo: clientInfo,
+  TimeStamp: new Date().toISOString()
+});
+
  
       sessionStorage.setItem(pageKey, '1');
       Log.info(LOG_SOURCE, 'Usage item created.');
