@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-extension-manifest.schema.json",
  
-  "id": "ba02833e-6320-4722-853a-223260956623",
+  "id": "a57f0dbe-14e1-41a0-b768-9bf7a19b84cb",
   "alias": "UsageLoggerFredApplicationCustomizer",
   "componentType": "Extension",
   "extensionType": "ApplicationCustomizer",
