@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "prod-fred-usage-log-client-side-2-solution",
-    "id": "ee4c8cbb-03af-4a13-bc7f-c3ef4872e19f",
+    "name": "Fred-Prod-Usage-clarity-client-side-solution",
+    "id": "ba02833e-6320-4722-853a-223260956623",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
